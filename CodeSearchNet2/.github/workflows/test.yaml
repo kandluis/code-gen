@@ -1,0 +1,47 @@
+name: Smoke Test
+on: [push, pull_request]
+
+# split into two jobs so it runs in parallel, even if a little redundant
+jobs:
+  basic_tests:
+    name: Build Test Container
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Copy Repo Files
+      uses: actions/checkout@master
+      
+    - name: docker build
+      run: | 
+        cd $GITHUB_WORKSPACE
+        docker build -t github/csnet-smoketest -f docker/docker-cpu.Dockerfile .
+   
+    - name: mypy type checking
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker run github/csnet-smoketest mypy --ignore-missing-imports --follow-imports skip /src/train.py /src/model_test.py
+      
+    - name: neuralbow, all languages
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker run github/csnet-smoketest python train.py /src /tests/data/data_train.txt /tests/data/data_train.txt /tests/data/data_train.txt --dryrun --max-num-epochs 1 --model neuralbow
+      
+    - name: --max-files-per-dir 2
+      run: |
+        cd $GITHUB_WORKSPACE 
+        docker run github/csnet-smoketest python train.py /src /tests/data/data_train.txt /tests/data/data_train.txt /tests/data/data_train.txt --dryrun --max-num-epochs 1 --max-files-per-dir 2
+  
+    - name: 1dcnn, all languages
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker run github/csnet-smoketest python train.py /src /tests/data/data_train.txt /tests/data/data_train.txt /tests/data/data_train.txt --dryrun --max-num-epochs 1 --model 1dcnn
+
+    - name: selfattn, all languages
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker run github/csnet-smoketest python train.py /src /tests/data/data_train.txt /tests/data/data_train.txt /tests/data/data_train.txt --dryrun --max-num-epochs 1 --model selfatt --hypers-override "{\"batch_size\":64}"
+
+    - name: rnn, all languages
+      run: |
+        cd $GITHUB_WORKSPACE
+        docker run github/csnet-smoketest python train.py /src /tests/data/data_train.txt /tests/data/data_train.txt /tests/data/data_train.txt --dryrun --max-num-epochs 1 --model rnn
