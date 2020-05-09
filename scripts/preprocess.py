@@ -22,6 +22,14 @@ def _argument_parser():
       'other suitable input formats.',
       required=True)
 
+  parser.add_argument(
+      'o',
+      '--outpath',
+      type=str,
+      help='Output path where files for each language to be processed should be '
+      'dumped. Relative to script execution',
+      default='tensorflow-char-rnn/data')
+
   return parser
 
 
