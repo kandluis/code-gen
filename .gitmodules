@@ -1,3 +1,6 @@
 [submodule "gpt2"]
 	path = gpt2
 	url = https://github.com/nshepperd/gpt-2
+[submodule "char-rnn"]
+	path = char-rnn
+	url = https://github.com/sherjilozair/char-rnn-tensorflow.git
