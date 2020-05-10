@@ -94,7 +94,9 @@ def tocharrn(df: pd.DataFrame, language: Text) -> Text:
 
 
 def main(args):
-  file_list = [_FILES[language.lower()] for language in args.languages]
+  file_list = []
+  for language in args.languages:
+    file_list += _FILES[language.lower()]
   data = load_codesearch_net_lite(file_list)
 
   for language in args.languages:
