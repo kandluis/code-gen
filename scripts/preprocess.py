@@ -113,7 +113,7 @@ def main(args):
 
   for language in args.languages:
     for partition, text in tocharrn(data, language).items():
-      path = pathlib.Path(args.outpath, partition, f'{language}.txt')
+      path = pathlib.Path(args.outpath, partition, language, 'input.txt')
       os.makedirs(os.path.dirname(path), exist_ok=True)
       with open(path, 'w') as out:
         out.write(text)
