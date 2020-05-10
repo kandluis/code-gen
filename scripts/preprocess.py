@@ -71,7 +71,7 @@ def load_codesearch_net_lite(file_list: List[Text]) -> pd.DataFrame:
                    sort=False)
 
 
-def tocharrn(df: pd.DataFrame, language: Text) -> List[Text, Text, Text]:
+def tocharrn(df: pd.DataFrame, language: Text) -> List[Text]:
   """Returns the contents of the .txt file to train char-rnn.
 
   (Train, Validation, Test)
