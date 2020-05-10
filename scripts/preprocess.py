@@ -55,7 +55,7 @@ def _argument_parser() -> argparse.ArgumentParser:
       type=str,
       help='Output path where files for each language to be processed should be '
       'dumped. Relative to script execution',
-      default='tensorflow-char-rnn/data')
+      default='../tensorflow-char-rnn/data')
 
   return parser
 
