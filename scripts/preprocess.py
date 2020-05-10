@@ -71,7 +71,7 @@ def load_codesearch_net_lite(file_list: List[Text]) -> pd.DataFrame:
                    sort=False)
 
 
-def tocharrn(df: pd.DataFrame, language: Text) -> List[Text]:
+def tocharrn(df: pd.DataFrame, language: Text) -> Dict[Text, Text]:
   """Returns the contents of the .txt file to train char-rnn.
 
   (Train, Validation, Test)
@@ -111,7 +111,7 @@ def main(args):
   data = load_codesearch_net_lite(file_list)
 
   for language in args.languages:
-    for partition, txt in tocharrn(data, language):
+    for partition, txt in tocharrn(data, language).items():
       with open(pathlib.Path(args.outpath, partition, f'{language}.txt'),
                 'w') as out:
         out.write(text)
