@@ -71,27 +71,37 @@ def load_codesearch_net_lite(file_list: List[Text]) -> pd.DataFrame:
                    sort=False)
 
 
-def tocharrn(df: pd.DataFrame, language: Text) -> Text:
+def tocharrn(df: pd.DataFrame, language: Text) -> List[Text, Text, Text]:
   """Returns the contents of the .txt file to train char-rnn.
+
+  (Train, Validation, Test)
 
   Generally, this is just going to concatenate all of the docstring + code
   snippets.
 
   We'll set-it up so that we have
   <START>
+
   <docstring>
+
   <code>
+
   <END>
   """
-  data = df[df.language == language]
-  text_snippets = []
-  for _, row in data.iterrows():
-    code = row['code']
-    doc = row['docstring']
-    text_snippets.append(f'{doc}\n{code}')
+  df = df[df.language == language]
+  result = {}
+  for partition in df.partition.unique():
+    data = df[df.partition == partition]
+    text_snippets = []
+    for _, row in data.iterrows():
+      code = row['code']
+      doc = row['docstring']
+      text_snippets.append(f'{doc}\n{code}')
 
-  return '<START>\n\n' + '\n<END>\n\n<START>\n'.join(
-      text_snippets) + '\n\n<END>'
+    result[partition] = '<START>\n\n' + '\n<END>\n\n<START>\n\n'.join(
+        text_snippets) + '\n\n<END>'
+
+  return result
 
 
 def main(args):
@@ -101,9 +111,10 @@ def main(args):
   data = load_codesearch_net_lite(file_list)
 
   for language in args.languages:
-    text = tocharrn(data, language)
-    with open(pathlib.Path(args.outpath, f'{language}.txt'), 'w') as out:
-      out.write(text)
+    for partition, txt in tocharrn(data, language):
+      with open(pathlib.Path(args.outpath, partition, f'{language}.txt'),
+                'w') as out:
+        out.write(text)
 
 
 if __name__ == '__main__':
