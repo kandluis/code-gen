@@ -1,0 +1,37 @@
+wandb: Waiting for W&B process to finish, PID 1100
+wandb: Program ended successfully.
+wandb: Run summary:
+wandb:                                    _step 220
+wandb:                                train-mrr 0.41225890886022687
+wandb:                               _timestamp 1589063787.747109
+wandb:                               train-loss 3.1543385600790064
+wandb:                                 _runtime 90055.80409860611
+wandb:                             val-time-sec 241.17750597000122
+wandb:                                 val-loss 3.827594317746966
+wandb:                                    epoch 9
+wandb:                                  val-mrr 0.3155774640715524
+wandb:                           train-time-sec 8331.393336772919
+wandb:                        best_val_mrr_loss 3.3052332320909823
+wandb:                             best_val_mrr 0.39883765094199874
+wandb:                               best_epoch 4
+wandb:                  Test-All MRR (bs=1,000) 0.43119153519951064
+wandb:          FuncNameTest-All MRR (bs=1,000) 0.5206263399397707
+wandb:            Validation-All MRR (bs=1,000) 0.43816796450921897
+wandb:                   Test-go MRR (bs=1,000) 0.497935041654941
+wandb:           FuncNameTest-go MRR (bs=1,000) 0.08139209790809811
+wandb:             Validation-go MRR (bs=1,000) 0.5689450520198912
+wandb:               Test-python MRR (bs=1,000) 0.3060715195945706
+wandb:       FuncNameTest-python MRR (bs=1,000) 0.4076509059100502
+wandb:         Validation-python MRR (bs=1,000) 0.2650433199806997
+wandb:                 Test-java MRR (bs=1,000) 0.2666296229756106
+wandb:         FuncNameTest-java MRR (bs=1,000) 0.5314908590457142
+wandb:           Validation-java MRR (bs=1,000) 0.2544210597956998
+wandb:           Test-javascript MRR (bs=1,000) 0.1289472283225154
+wandb:   FuncNameTest-javascript MRR (bs=1,000) 0.04965641012352453
+wandb:     Validation-javascript MRR (bs=1,000) 0.1317131383479902
+wandb:                  Test-php MRR (bs=1,000) 0.2946508224046745
+wandb:          FuncNameTest-php MRR (bs=1,000) 0.5912050614353221
+wandb:            Validation-php MRR (bs=1,000) 0.3003809703733638
+wandb:                 Test-ruby MRR (bs=1,000) 0.08493144177627938
+wandb:         FuncNameTest-ruby MRR (bs=1,000) 0.20731376776373694
+wandb:           Validation-ruby MRR (bs=1,000) 0.10168902369875718
