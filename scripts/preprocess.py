@@ -112,7 +112,7 @@ def main(args):
   data = load_codesearch_net_lite(file_list)
 
   for language in args.languages:
-    for partition, txt in tocharrn(data, language).items():
+    for partition, text in tocharrn(data, language).items():
       path = pathlib.Path(args.outpath, partition, f'{language}.txt')
       os.makedirs(os.path.dirname(path), exist_ok=True)
       with open(path, 'w') as out:
