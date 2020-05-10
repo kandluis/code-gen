@@ -60,9 +60,9 @@ def _argument_parser() -> argparse.ArgumentParser:
 
   parser.add_argument(
       '-p',
-      '--percent',
+      '--permille',
       type=int,
-      help='In [0, 100] percent of data to keep when transforming.',
+      help='In [0, 1000] permille of data to keep when transforming.',
       default=100)
 
   return parser
@@ -122,7 +122,7 @@ def main(args):
 
   for language in args.languages:
     for partition, text in tocharrn(data, language,
-                                    args.percent / 100).items():
+                                    args.percent / 1000).items():
       path = pathlib.Path(args.outpath, partition, language,
                           f'input_{args.percent}.txt')
       os.makedirs(os.path.dirname(path), exist_ok=True)
