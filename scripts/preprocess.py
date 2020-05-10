@@ -90,7 +90,8 @@ def tocharrn(df: pd.DataFrame, language: Text) -> Text:
     doc = row['docstring']
     text_snippets.append(f'{doc}\n{code}')
 
-  return '<START>' + '<END><START>'.join(text_snippets) + '<END>'
+  return '<START>\n\n' + '\n<END>\n\n<START>\n'.join(
+      text_snippets) + '\n\n<END>'
 
 
 def main(args):
