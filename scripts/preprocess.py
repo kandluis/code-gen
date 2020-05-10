@@ -103,7 +103,7 @@ def tocharrn(df: pd.DataFrame, language: Text,
     data = df[df.partition == partition]
     text_snippets = []
     for i, row in data.iterrows():
-      if i < len(data) * frac:
+      if i < len(data) * fract:
         code = row['code']
         doc = row['docstring']
         text_snippets.append(f'{doc}\n{code}')
