@@ -122,9 +122,9 @@ def main(args):
 
   for language in args.languages:
     for partition, text in tocharrn(data, language,
-                                    args.percent / 1000).items():
+                                    args.permille / 1000).items():
       path = pathlib.Path(args.outpath, partition, language,
-                          f'input_{args.percent}.txt')
+                          f'input_{args.permille}.txt')
       os.makedirs(os.path.dirname(path), exist_ok=True)
       with open(path, 'w') as out:
         out.write(text)
