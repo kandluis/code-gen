@@ -54,9 +54,16 @@ def _argument_parser() -> argparse.ArgumentParser:
       '-o',
       '--outpath',
       type=str,
-      help='Output path where files for each language to be processed should be '
-      'dumped. Relative to script execution',
+      help='Output path where files for each language to be processed should '
+      'be dumped. Relative to script execution',
       default='../tensorflow-char-rnn/data')
+
+  parser.add_argument(
+      '-p',
+      '--percent',
+      type=int,
+      help='In [0, 100] percent of data to keep when transforming.',
+      default=100)
 
   return parser
 
@@ -72,7 +79,8 @@ def load_codesearch_net_lite(file_list: List[Text]) -> pd.DataFrame:
                    sort=False)
 
 
-def tocharrn(df: pd.DataFrame, language: Text) -> Dict[Text, Text]:
+def tocharrn(df: pd.DataFrame, language: Text,
+             fract: float) -> Dict[Text, Text]:
   """Returns the contents of the .txt file to train char-rnn.
 
   (Train, Validation, Test)
@@ -94,10 +102,11 @@ def tocharrn(df: pd.DataFrame, language: Text) -> Dict[Text, Text]:
   for partition in df.partition.unique():
     data = df[df.partition == partition]
     text_snippets = []
-    for _, row in data.iterrows():
-      code = row['code']
-      doc = row['docstring']
-      text_snippets.append(f'{doc}\n{code}')
+    for i, row in data.iterrows():
+      if i < len(data) * frac:
+        code = row['code']
+        doc = row['docstring']
+        text_snippets.append(f'{doc}\n{code}')
 
     result[partition] = '<START>\n\n' + '\n<END>\n\n<START>\n\n'.join(
         text_snippets) + '\n\n<END>'
@@ -112,8 +121,10 @@ def main(args):
   data = load_codesearch_net_lite(file_list)
 
   for language in args.languages:
-    for partition, text in tocharrn(data, language).items():
-      path = pathlib.Path(args.outpath, partition, language, 'input.txt')
+    for partition, text in tocharrn(data, language,
+                                    args.percent / 100).items():
+      path = pathlib.Path(args.outpath, partition, language,
+                          f'input_{args.percent}.txt')
       os.makedirs(os.path.dirname(path), exist_ok=True)
       with open(path, 'w') as out:
         out.write(text)
