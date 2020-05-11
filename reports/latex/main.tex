@@ -132,7 +132,14 @@ def vert_event_notify_channel(self, infna=1)
 \section{Next Steps}
 For our next steps, we plan on working to figure out how to make use of the CodeSearchNet baselines with our generative model. It's not yet clear to use how to do this, or how to merge the two. However, at the minimum we believe we can improve the performance of the baseline models by tuning some of the hyperparameters, as it's clear that for our dataset there appears to be overfitting. 
 
-We also plan to explore more diverse sets of modeling techniques, such as GANs. We believe this approach will prove fruitful since we're trying to generate code. Another alternative we're considering approaching involves the use of graph neural networks to process generate ASTs, rather than raw text.
+CodeBERT \cite{codebert} is a transformer method to generate documentation from code and builds on top of the CodeSearchNet paper. It improves the results compared to the NBow and LSTM results that we have discussed above. On the other hand, the above problems mainly focus on “searching/ranking code given multiple snippets and a NL query” and also the work focuses on generating documentation.
+
+The Char-RNN work that we were able to test out also shows the shortcomings that we had expected, where the generated “code” is not in a compiler-acceptable form. The CodeSearchNet attempt starts with translating code to a tree structure before applying Seq2Seq models on top of it, and we can hypothesize that a Tree modelling would be a necessary condition for modelling and eventually generating code.
+
+In that spirit, TreeGAN \cite{treegan} focuses on building a tree (where a tree itself is represented as a sequence) and a GAN is used to generate the code sequences with Policy Gradient used to tackle the problem of finding a differentiable cost function in such instances. 
+
+As next steps, we propose to investigate and attempt to run the GAN models (either TreeGAN or SeqGAN) and verify the claims, and in the case that we are able to verify that they indeed work we can proceed to extend to the case of generating unit tests.
+
 
 
 \bibliographystyle{unsrt}
