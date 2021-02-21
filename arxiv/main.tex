@@ -26,17 +26,17 @@
 \title{Automatic Code Generation using Pre-Trained Language Models}
 
 \author{
-  Lizi Ottens  \\
-  Department of Computer Science\\
-  Stanford University\\
-  \texttt{lottens@stanford.edu}
-  
-  \and
-  
+
   Luis Perez \\
   Department of Computer Science \\
   Stanford University \\
   \texttt{luis0@stanford.edu}
+  
+  \and
+  Lizi Ottens  \\
+  Department of Computer Science\\
+  Stanford University\\
+  \texttt{lottens@stanford.edu}
   
   \and
   
@@ -51,7 +51,7 @@
 \maketitle
 
 \begin{abstract}
- Recent advancements in natural language processing \cite{gpt2} \cite{BERT} have led to near-human performance in multiple natural language tasks. In this paper, we seek to understand whether similar techniques can be applied to a highly structured environment with strict syntax rules. Specifically, we propose an end-to-end machine learning model for code generation in the Python language built on-top of pre-trained language models. We demonstrate that a fine-tuned model can perform  well in code generation tasks, achieving a BLEU score of 0.22, an improvement of 46\% over a reasonable sequence-to-sequence baseline. All results and related code used for training and data processing are available on GitHub. \footnote{See shared repository located at \href{https://github.com/kandluis/cs230}{https://github.com/kandluis/cs230}.}
+ Recent advancements in natural language processing \cite{gpt2} \cite{BERT} have led to near-human performance in multiple natural language tasks. In this paper, we seek to understand whether similar techniques can be applied to a highly structured environment with strict syntax rules. Specifically, we propose an end-to-end machine learning model for code generation in the Python language built on-top of pre-trained language models. We demonstrate that a fine-tuned model can perform  well in code generation tasks, achieving a BLEU score of 0.22, an improvement of 46\% over a reasonable sequence-to-sequence baseline. All results and related code used for training and data processing are available on GitHub. \footnote{See shared repository located at \href{https://github.com/kandluis/code-gen}{https://github.com/kandluis/code-gen}.}
 \end{abstract}
 
 \section{Introduction}
